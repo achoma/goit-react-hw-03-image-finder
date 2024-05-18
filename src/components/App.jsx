@@ -1,5 +1,3 @@
-//import { Component } from 'react';
-
 import axios from 'axios';
 import css from './App.module.css';
 import { Searchbar } from './Searchbar/Searchbar';
@@ -11,7 +9,6 @@ import { Button } from './Button/Button';
 import { Modal } from './Modal/Modal';
 
 export const App = () => {
-  //State
   const [currentPage, setCurrentPage] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
   const [searchedImages, setSearchedImages] = useState('');
@@ -22,7 +19,6 @@ export const App = () => {
   const [openModal, setOpenModal] = useState(false);
   const [modalSrc, setModalSrc] = useState('');
 
-  //Pixabay API
   const fetchGallery = async (q, page) => {
     const baseURL = `https://pixabay.com/api/?q=${q}&page=${page}&key=42580380-f7e9d56cf0d50abf8107b2707&image_type=photo&orientation=horizontal&per_page=12`;
     try {
@@ -34,7 +30,6 @@ export const App = () => {
     }
   };
 
-  //Handle and fetch value from input
   const fetchSearchedValue = async data => {
     setIsLoading(true);
     setSearchedImages(data);
@@ -58,7 +53,6 @@ export const App = () => {
     }, 1000);
   };
 
-  //check if loadmore is abled
   const checkIfLoadMore = data => {
     if (data > 12) {
       console.log('totalHits większe niż 12');
@@ -72,7 +66,6 @@ export const App = () => {
     }
   };
 
-  //load more images
   const loadMore = async () => {
     setIsLoading(true);
     console.log('loadmore searchedValue' + searchedImages);
@@ -86,10 +79,9 @@ export const App = () => {
     }, 1000);
   };
 
-  //Modal- handle data from image and change the state to open/close modal
   const handleImageClick = image => {
     setOpenModal(true);
-    setModalSrc(image.largeImageURL); //sprawdzić czy działa, jak nie to jak pobrać large url żeby wstawić jako source
+    setModalSrc(image.largeImageURL);
   };
 
   const closeModal = () => {
