@@ -1,18 +1,40 @@
-import { ThreeCircles } from 'react-loader-spinner';
-import { Container } from 'components/Container/Container';
+import PropTypes from 'prop-types';
+import { MagnifyingGlass } from 'react-loader-spinner';
 
-export const Loader = () => {
+export const Loader = (
+  ariaLabel,
+  color,
+  glassColor,
+  height,
+  visible,
+  width,
+  wrapperClass,
+  wrapperStyle
+) => {
+  const style = { textAlign: 'center' };
   return (
-    <Container>
-      <ThreeCircles
+    <div style={style}>
+      <MagnifyingGlass
         visible={true}
-        height="100"
-        width="100"
-        color="#4fa94d"
-        ariaLabel="three-circles-loading"
+        height="80"
+        width="80"
+        ariaLabel="magnifying-glass-loading"
         wrapperStyle={{}}
-        wrapperClass=""
+        wrapperClass="magnifying-glass-wrapper"
+        glassColor="#c0efff"
+        color="#e15b64"
       />
-    </Container>
+    </div>
   );
+};
+
+Loader.propTypes = {
+  ariaLabel: PropTypes.string,
+  color: PropTypes.string,
+  glassColor: PropTypes.string,
+  height: PropTypes.string,
+  visible: PropTypes.bool,
+  width: PropTypes.string,
+  wrapperClass: PropTypes.string,
+  wrapperStyle: PropTypes.object,
 };

@@ -1,23 +1,38 @@
-import css from './Modal.module.css';
 import PropTypes from 'prop-types';
+import { useEffect } from 'react';
+import css from './Modal.module.css';
 
-export const Modal = ({ largeImageURL, tags, onClick }) => {
+export const Modal = ({ onClick, openModal }) => {
+  //Close modal on Escape
+  useEffect(() => {
+    const handleKeyDown = e => {
+      if (e.keyCode === 27) {
+        onClick();
+      }
+    };
+    document.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [onClick]);
+
+  //Close modal if clicked out of the image
+  const handleCloseModal = e => {
+    if (e.target === e.currentTarget) {
+      onClick();
+    }
+  };
   return (
-    <div className={css.overlay}>
+    <div className={css.overlay} onClick={handleCloseModal}>
       <div className={css.modal}>
-        <img
-          className={css.image}
-          src={largeImageURL}
-          alt={tags}
-          onClick={onClick}
-        />
+        <img src={openModal} alt="" width="800" height="600" />
       </div>
     </div>
   );
 };
 
 Modal.propTypes = {
-  largeImageURL: PropTypes.string.isRequired,
-  tags: PropTypes.string.isRequired,
-  onClick: PropTypes.func.isRequired,
+  onClick: PropTypes.func,
+  openModal: PropTypes.func,
 };

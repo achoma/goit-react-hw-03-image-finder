@@ -1,23 +1,16 @@
-import css from './Button.module.css';
 import PropTypes from 'prop-types';
+import css from './Button.module.css';
 
-// import { Container } from 'components/Container/Container';
-
-export const Button = ({ onClick, children }) => {
+export const Button = ({ disabled, onClick }) => {
   return (
     <>
-      <button className={css.button} type="button" onClick={onClick}>
-        {children}
+      <button className={css.button} disabled={disabled} onClick={onClick}>
+        {disabled ? 'End of results' : 'Load more'}
       </button>
     </>
   );
 };
-//--------------- to dopisałam -----------------------
+
 Button.propTypes = {
   loadMore: PropTypes.func,
 };
-// -------- to było ------------
-// Button.propTypes = {
-//   onClick: PropTypes.func.isRequired,
-//   children: PropTypes.string.isRequired,
-// };
